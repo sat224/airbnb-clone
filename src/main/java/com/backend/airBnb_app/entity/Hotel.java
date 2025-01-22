@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Table(name = "hotel")
 public class Hotel {
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
@@ -21,19 +23,22 @@ public class Hotel {
 
    private String city;
 
-   @Column(columnDefinition = "TEXT[]") // we need to explicitly specific the type of data that is going to store in db table's column
-   private String[] photos;
+   @Column(columnDefinition = "JSON")
+   private String photos;
 
-   @Column(columnDefinition = "TEXT[]")
-   private String[] amenities;
+   @Column(columnDefinition = "JSON")
+   private String amenities;
 
    @CreationTimestamp
-   private LocalDateTime createAt;
+   private LocalDateTime createdAt;
 
    @UpdateTimestamp
    private LocalDateTime updatedAt;
 
    @Embedded
    private HotelContactInfo contactInfo;
+
+   @Column(nullable = false)
+   private Boolean active;
 
 }
